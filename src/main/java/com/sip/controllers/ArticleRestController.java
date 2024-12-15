@@ -1,6 +1,8 @@
 package com.sip.controllers;
 
 import com.sip.entities.Article;
+import com.sip.entities.ArticleDTO;
+import com.sip.entities.ArticleDTORecord;
 import com.sip.services.ArticleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,12 @@ public class ArticleRestController {
 		return articleService.getAllArticles();
 	}
 
+	@GetMapping("/articlesDto")
+	public List<ArticleDTORecord> getAllArticlesDTO() {
+		return articleService.getAllArticlesWithDTO();
+	}
+
+	
 	// Get a single article by ID
 	@GetMapping("/{id}")
 	public Article getArticleById(@PathVariable Long id) {
@@ -29,10 +37,11 @@ public class ArticleRestController {
 	}
 
 	// Create a new article
-	@PostMapping
-	public Article createArticle(@Valid @RequestBody Article article) {
-		return articleService.addArticle(article);
+	@PostMapping("/{providerId}")
+	Article createArticle(@PathVariable(value = "providerId") Long providerId, @Valid @RequestBody Article article) {
+		return articleService.createArticle(providerId, article);
 	}
+
 
 	// Update an existing article
 	@PutMapping("/{id}")
