@@ -71,6 +71,7 @@
 	</dependencies>
 
 	<build>
+	<finalName>ams</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
